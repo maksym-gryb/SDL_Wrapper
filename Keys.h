@@ -21,7 +21,7 @@ enum Keys{
     KEY_RIGHT,
     KEY_DOWN,
     KEY_LEFT,
-    KEY_SPACE
+    KEY_SPACE,
 };
 
 #endif /* KEYS_H */
