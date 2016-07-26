@@ -6,8 +6,9 @@ Sprite::Sprite() : Node()
     m_sprite_path = "";
 }
 
-Sprite::Sprite(std::string p_sprite_path) : Sprite()
+Sprite::Sprite(std::string p_sprite_path) : Node()
 {
+    // Image
     m_sprite_path = p_sprite_path;
 }
 
