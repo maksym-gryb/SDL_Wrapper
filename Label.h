@@ -3,8 +3,6 @@
 
 #include "Node.h"
 
-#include "Director.h"
-
 #include <string>
 
 const int DEFAULT_TEXT_SIZE = 18;
