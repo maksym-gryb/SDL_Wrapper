@@ -34,6 +34,9 @@ public:
 
     /** Image */
     std::string getSpritePath();
+    
+    /** Sprite */
+    virtual void update() = 0;
 
 protected:
     /** Image */
