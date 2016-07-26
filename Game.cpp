@@ -23,8 +23,6 @@ Game::Game()
 
         m_scene = 0;
 
-        //setupPauseMenu();
-
         settleTimers();
     }
     else
@@ -77,24 +75,10 @@ void Game::cleanUp()
     Director::getInstance()->cleanUp();
 }
 
-/*void Game::setupPauseMenu()
-{
-    //Sprite* pMenuItem;
-
-    //pMenuItem = Director::getInstance()->createMenuItem("GAME PAUSED", WINDOW_WIDTH/2 - 32*5, WINDOW_HEIGHT/2 - 32, 32);
-    //pMenuItem->showSprite(false);
-    //pause_menu.push_back(pMenuItem);
-}*/
-
 bool Game::isRunning()
 {
     return Director::getInstance()->isRunning();
 }
-
-/*bool Game::isPaused()
-{
-    return Director::getInstance()->isPaused();
-}*/
 
 void Game::setScene(Scene* pScene)
 {
@@ -111,19 +95,6 @@ long Game::getTimer()
     return m_timer_now;
 }
 
-/*void Game::pause()
-{
-    Director::getInstance()->pause();
-    showPauseMenu();
-}
-
-void Game::unpause()
-{
-    Director::getInstance()->unpause();
-    hidePauseMenu();
-    settleTimers();
-}*/
-
 void Game::update()
 {
     if (m_timer_now < m_timer_next[UPDATE_TIMER] || getScene() == 0)
@@ -131,10 +102,6 @@ void Game::update()
 
     // reset timer
     m_timer_next[UPDATE_TIMER] = m_timer_now + GAME_SPEED;
-
-    // When game is paused
-    /*if(isPaused())
-        return;*/
 
     // Run scene
     if(m_scene != NULL)
@@ -144,17 +111,6 @@ void Game::update()
 void Game::handleEvents()
 {
     Director::getInstance()->handleEvents();
-}
-
-void Game::handleUserInput()
-{
-    if(Director::getInstance()->getKey(/*KEY_ENTER*/0))
-    {
-        /*if(isPaused())
-            unpause();
-        else
-            pause();*/
-    }
 }
 
 void Game::resetInput()

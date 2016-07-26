@@ -63,14 +63,6 @@ public:
   void animation();
   void render();
 
-  /** Pause */
-  //void pause();
-  //void unpause();
-
-  /** Pause Menu */
-  //void showPauseMenu();
-  //void hidePauseMenu();
-
   /** Utilities */
   //void displayFramerate();
   void settleTimers();
