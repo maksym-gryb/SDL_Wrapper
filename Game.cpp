@@ -57,8 +57,6 @@ int Game::run(Scene* p_starting_scene)
         animation();
 
         handleEvents();
-
-        handleUserInput();
     }
 
     cleanUp();

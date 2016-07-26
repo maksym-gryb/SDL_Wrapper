@@ -58,7 +58,6 @@ public:
   long getTimer();
   void update();
   void handleEvents();
-  void handleUserInput();
   void resetInput();
   void animation();
   void render();
