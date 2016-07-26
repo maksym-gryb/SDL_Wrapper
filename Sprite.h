@@ -23,6 +23,7 @@
 
 #include "Vec2.h"
 #include "Node.h"
+#include "Director.h"
 
 class Sprite : public Node{
 public:
