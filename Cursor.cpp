@@ -18,7 +18,6 @@ Cursor::Cursor() : Sprite()
 
     // Image
     m_sprite_path = "resources/cursor.png";
-    m_sprite_path = "resources/potato.jpg";
 }
 
 Cursor* Cursor::getInstance()
