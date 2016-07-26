@@ -146,18 +146,6 @@ void Game::animation()
     Director::getInstance()->animation();
 }
 
-/*void Game::showPauseMenu()
-{
-    //for(std::vector<Sprite*>::iterator it = pause_menu.begin(); it != pause_menu.end(); it++)
-        //(*it)->showSprite(true);
-}
-
-void Game::hidePauseMenu()
-{
-    //for(std::vector<Sprite*>::iterator it = pause_menu.begin(); it != pause_menu.end(); it++)
-        //(*it)->showSprite(false);
-}*/
-
 void Game::settleTimers()
 {
     m_timer_now = Director::getInstance()->getTimer();
