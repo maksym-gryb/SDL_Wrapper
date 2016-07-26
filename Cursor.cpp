@@ -31,3 +31,8 @@ Cursor* Cursor::getInstance()
 
 
 Cursor::~Cursor() {}
+
+void Cursor::update()
+{
+    
+}

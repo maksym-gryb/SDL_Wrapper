@@ -8,6 +8,9 @@ private:
     /** Singleton */
     Cursor();
     static Cursor* instance;
+    
+    /** Sprite */
+    void update();
 
 public:
     static Cursor* getInstance();
