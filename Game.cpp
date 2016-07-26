@@ -81,6 +81,8 @@ bool Game::isRunning()
 void Game::setScene(Scene* pScene)
 {
     m_scene = pScene;
+    
+    m_scene->setup();
 }
 
 Scene* Game::getScene()

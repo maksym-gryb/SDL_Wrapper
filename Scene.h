@@ -21,6 +21,7 @@ public:
     virtual ~Scene();
     
     /** Scene */
+    virtual void setup() = 0;
     virtual int run() = 0;
 };
 
