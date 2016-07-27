@@ -53,9 +53,15 @@ void Node::setPosition(Vec2<double> pos)
     }
 }
 
-void Node::moveBy(Vec2<double> mov)
+void Node::moveBy(Vec2<double> p_movement)
 {
-    setPosition(m_position + mov);
+    m_position += p_movement;
+
+    if(m_texture_dst != NULL)
+    {
+        m_texture_dst->x += p_movement.x;
+        m_texture_dst->y += p_movement.y;
+    }
 }
 
 Vec2<double> Node::getPosition()
