@@ -89,6 +89,11 @@ void Node::setAnchor(Vec2<double> p_anchor)
     m_anchor = p_anchor;
 }
 
+Vec2<double> Node::getAnchor()
+{
+    return m_anchor;
+}
+
 void Node::setTexture(SDL_Texture* p_texture)
 {
     m_texture = p_texture;

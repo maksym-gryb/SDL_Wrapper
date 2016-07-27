@@ -24,6 +24,7 @@ public:
 
     // anchor
     void setAnchor(Vec2<double> p_anchor);
+    Vec2<double> getAnchor();
 
     // size
     void setSize(Vec2<double> p_size);
