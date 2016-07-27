@@ -25,6 +25,7 @@ public:
     /**Set */
     void pressKey(int p_key);
     void releaseKey(int p_keys);
+    void resetKey(int p_key);
     
     /**Get */
     bool getKey(int p_key);

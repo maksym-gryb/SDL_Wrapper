@@ -43,6 +43,11 @@ bool InputHandler::getKey(int p_key)
     return false;
 }
 
+void InputHandler::resetKey(int p_key)
+{
+    m_keyUsed[p_key] = false;
+}
+
 void InputHandler::resetInput()
 {
     for(int i = 0; i < KEYS; i++)

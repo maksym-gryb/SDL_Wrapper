@@ -50,7 +50,8 @@ public:
   /**Input */
   void handleEvents();
   void resetInput();
-  bool getKey(int key);
+  bool getKey(int p_key);
+  void resetKey(int p_key);
 
   /**Nodes */
   void addNode(Sprite* p_sprite);

@@ -178,6 +178,11 @@ bool Director::getKey(int p_key)
     return m_input_handler->getKey(p_key);
 }
 
+void Director::resetKey(int p_key)
+{
+    m_input_handler->resetKey(p_key);
+}
+
 /*TTF_Font* Director::getDefaultFont()
 {
     return m_default_font;
