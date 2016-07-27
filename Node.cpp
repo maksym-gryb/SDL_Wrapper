@@ -63,6 +63,16 @@ Vec2<double> Node::getPosition()
     return m_position;
 }
 
+void Node::setSize(Vec2<double> p_size)
+{
+    // Arrangement
+    m_size = p_size;
+    
+    // Texture
+    m_texture_dst->w = m_size.x;
+    m_texture_dst->h = m_size.y;
+}
+
 Vec2<double> Node::getSize()
 {
     return m_size;
