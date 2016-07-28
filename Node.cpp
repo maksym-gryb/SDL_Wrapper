@@ -21,7 +21,7 @@ Node::Node()
 
 Node::~Node()
 {
-    SDL_DestroyTexture(m_texture);
+    //SDL_DestroyTexture(m_texture);
 }
 
 int Node::getId()
