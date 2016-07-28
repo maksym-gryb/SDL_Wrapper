@@ -47,7 +47,7 @@ double Body::getMaxRadius()
     return m_max_radius;
 }
 
-bool Body::inRange(Body* that)
+bool Body::inRangeWith(Body* that)
 {
     double delta_x = this->getCenter().x - that->getCenter().x;
     double delta_y = this->getCenter().y - that->getCenter().y;

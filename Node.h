@@ -18,8 +18,8 @@ public:
 
     /**Arrangement */
     // position
-    void setPosition(Vec2<double> p_position);
-    void moveBy(Vec2<double> p_movement);
+    virtual void setPosition(Vec2<double> p_position);
+    virtual void moveBy(Vec2<double> p_movement);
     Vec2<double> getPosition();
 
     // anchor

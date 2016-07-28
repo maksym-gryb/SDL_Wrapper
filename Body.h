@@ -33,7 +33,7 @@ public:
     double getMaxRadius();
     
     /** Collision */
-    bool inRange(Body *that);
+    bool inRangeWith(Body *that);
     bool collidesWith(Body *that);
     
     /** Utilities */

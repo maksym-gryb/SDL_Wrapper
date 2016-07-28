@@ -31,6 +31,10 @@ public:
     Sprite();
     Sprite(std::string p_sprite_path);
     virtual ~Sprite();
+    
+    /** Arrangement */
+    void setPosition(Vec2<double> p_position);
+    void moveBy(Vec2<double>);
 
     /** Image */
     std::string getSpritePath();
@@ -40,6 +44,8 @@ public:
     
     /** Collision */
     void setCollisionBody(Body* p_body);
+    Body* getCollisionBody();
+    bool inRangeWith(Sprite *that);
     bool collidesWith(Sprite *that);
 
 protected:
