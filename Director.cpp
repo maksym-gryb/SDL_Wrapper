@@ -188,24 +188,46 @@ void Director::resetKey(int p_key)
     return m_default_font;
 }*/
 
-void Director::addNode(Sprite* pSprite)
+void Director::addNode(Sprite* p_sprite)
 {
-    p_nodes.push_back(pSprite);
+    m_sprites.push_back(p_sprite);
 
     // Create textures if needed
-    if(pSprite->getSpritePath() != "")
-        Director::getInstance()->assignTexture(pSprite);
+    if(p_sprite->getSpritePath() != "")
+        Director::getInstance()->assignTexture(p_sprite);
 }
 
-void Director::deleteNode(Sprite* pSprite)
+void Director::deleteNode(Sprite* p_sprite)
 {
-    int id = pSprite->getId();
-    for(std::vector<Node*>::iterator it = p_nodes.begin(); it != p_nodes.end(); it++)
+    int id = p_sprite->getId();
+    for(std::vector<Sprite*>::iterator it = m_sprites.begin(); it != m_sprites.end(); it++)
     {
         if((*it)->getId() == id)
         {
             delete (*it);
-            it = p_nodes.erase(it);
+            it = m_sprites.erase(it);
+            break;
+        }
+    }
+}
+
+void Director::addNode(Label* p_label)
+{
+    m_labels.push_back(p_label);
+
+    // Create textures if needed
+    Director::getInstance()->assignTexture(p_label);
+}
+
+void Director::deleteNode(Label* p_label)
+{
+    int id = p_label->getId();
+    for(std::vector<Label*>::iterator it = m_labels.begin(); it != m_labels.end(); it++)
+    {
+        if((*it)->getId() == id)
+        {
+            delete (*it);
+            it = m_labels.erase(it);
             break;
         }
     }
@@ -267,10 +289,22 @@ void Director::render()
 void Director::draw()
 {
     // Draw Sprites
-    for (std::vector<Node*>::iterator it = p_nodes.begin(); it != p_nodes.end();)
+    for (std::vector<Sprite*>::iterator it = m_sprites.begin(); it != m_sprites.end();)
     {
         if ((*it) == NULL)
-            it = p_nodes.erase(it);
+            it = m_sprites.erase(it);
+        else
+        {
+            draw(*it);
+            it++;
+        }
+    }
+    
+    // Draw Labels
+    for (std::vector<Label*>::iterator it = m_labels.begin(); it != m_labels.end();)
+    {
+        if ((*it) == NULL)
+            it = m_labels.erase(it);
         else
         {
             draw(*it);

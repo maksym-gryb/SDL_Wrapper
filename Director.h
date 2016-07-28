@@ -88,7 +88,8 @@ private:
     //bool m_critical_error;
 
     // Containers
-    std::vector<Node*> p_nodes;
+    std::vector<Sprite*> m_sprites;
+    std::vector<Label*>  m_labels;
     std::map<std::string, SDL_Texture*> m_loaded_textures;
 
     // SDL
