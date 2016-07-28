@@ -23,6 +23,7 @@
 
 #include "Vec2.h"
 #include "Node.h"
+#include "Body.h"
 
 class Sprite : public Node{
 public:
@@ -36,10 +37,17 @@ public:
     
     /** Sprite */
     virtual void update() = 0;
+    
+    /** Collision */
+    void setCollisionBody(Body* p_body);
+    bool collidesWith(Sprite *that);
 
 protected:
     /** Image */
     std::string m_sprite_path;
+    
+    /** Collision Body */
+    Body* m_body;
 };
 
 #endif /* SPRITE_H */

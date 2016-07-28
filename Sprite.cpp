@@ -18,3 +18,13 @@ std::string Sprite::getSpritePath()
 {
     return m_sprite_path;
 }
+
+void Sprite::setCollisionBody(Body* p_body)
+{
+    m_body = p_body;
+}
+
+bool Sprite::collidesWith(Sprite* that)
+{
+    return this->collidesWith(that);
+}
