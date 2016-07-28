@@ -205,7 +205,6 @@ void Director::deleteNode(Sprite* pSprite)
         if((*it)->getId() == id)
         {
             delete (*it);
-            (*it) = NULL;
             it = p_nodes.erase(it);
             break;
         }
