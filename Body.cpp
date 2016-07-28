@@ -39,7 +39,7 @@ std::vector< Vec2<double> >::iterator Body::end()
 
 Vec2<double> Body::getCenter()
 {
-    return m_max_radius;
+    return m_center;
 }
 
 double Body::getMaxRadius()
