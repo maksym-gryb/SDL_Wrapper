@@ -21,7 +21,7 @@ void Sprite::setPosition(Vec2<double> p_position)
 {
     Node::setPosition(p_position);
     
-    /*std::vector<Vec2<double> >::iterator it = m_body->start();
+    std::vector<Vec2<double> >::iterator it = m_body->start();
     
     for(;it != m_body->end(); it++)
     {
@@ -36,17 +36,17 @@ void Sprite::setPosition(Vec2<double> p_position)
             (*it).y += m_body->getCenter().y;
         
         (*it) = (*it) + p_position;
-    }*/
+    }
 }
 
 void Sprite::moveBy(Vec2<double> p_mov)
 {
     Node::moveBy(p_mov);
     
-    /*std::vector<Vec2<double> >::iterator it = m_body->start();
+    std::vector<Vec2<double> >::iterator it = m_body->start();
     
     for(;it != m_body->end(); it++)
-        (*it) += p_mov;*/
+        (*it) += p_mov;
 }
 
 std::string Sprite::getSpritePath()
