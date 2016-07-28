@@ -97,8 +97,8 @@ void Body::calculateCenter()
         m_center = m_center / m_points.size();
         
         // calculate max radius
-        if(m_max_radius == Vec2<double>(0.0, 0.0))
-            m_max_radius = Vec2<double>(0.0, 0.0);
+        if(m_max_radius == 0.0)
+            m_max_radius = 0.0;
         
         for(unsigned i = 0; i < m_points.size(); i++)
         {
