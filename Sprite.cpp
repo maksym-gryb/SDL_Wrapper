@@ -75,5 +75,5 @@ bool Sprite::inRangeWith(Sprite* that)
 
 bool Sprite::collidesWith(Sprite* that)
 {
-    return this->collidesWith(that);
+    return this->m_body->collidesWith(that->m_body);
 }
