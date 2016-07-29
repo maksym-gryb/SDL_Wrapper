@@ -55,11 +55,6 @@ bool Body::inRangeWith(Body* that)
     double distance = sqrt(pow(delta_x, 2) + pow(delta_y, 2));
     double limit    = this->getMaxRadius() + that->getMaxRadius();
     
-    std::cout << "Projectile Max Radius: " << this->getMaxRadius() << " -- ";
-    std::cout << "Ship Max Radius: " << that->getMaxRadius() << std::endl;
-    std::cout << "limit: (" << limit << ") -- ";
-    std::cout << "distance: (" << distance << ")" << std::endl;
-    
     if(distance < limit)
         return true;
     
