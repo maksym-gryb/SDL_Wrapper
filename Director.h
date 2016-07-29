@@ -16,6 +16,8 @@
 #include "WindowWrapper.h"
 #include "InputHandler.h"
 
+#include "Globals.h"
+
 #define WINDOW_X 10
 #define WINDOW_Y 10
 #define WINDOW_W 640
@@ -69,7 +71,9 @@ public:
   void render();
   void draw();
   void draw(Node* p_node);
-  //void drawBody(Sprite* p_sprite);// collision body//////////////////?
+#ifndef PRODUCTION_MODE
+  void draw(Body* p_body);
+#endif
 
   /**Animation */
   void animation();
@@ -94,7 +98,7 @@ private:
 
     // SDL
     WindowWrapper* m_windows;
-    SDL_Surface* m_surface;
+    SDL_Surface*   m_surface;
     TTF_Font* m_default_font;
 
     // Input

@@ -14,10 +14,8 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#ifdef __cplusplus
-
 // Comment this to go into production mode
-#define DEVELOPMENT_MODE
+//#define PRODUCTION_MODE
 
 #endif /* GLOBALS_H */
 

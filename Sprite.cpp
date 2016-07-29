@@ -28,15 +28,17 @@ void Sprite::setPosition(Vec2<double> p_position)
         if((*it).x > m_body->getCenter().x)
             (*it).x -= m_body->getCenter().x;
         else
-            (*it).x += m_body->getCenter().x;
+            (*it).x = m_body->getCenter().x - (*it).x;
         
         if((*it).y > m_body->getCenter().y)
             (*it).y -= m_body->getCenter().y;
         else
-            (*it).y += m_body->getCenter().y;
+            (*it).y = m_body->getCenter().y - (*it).y;
         
         (*it) = (*it) + p_position;
     }
+    
+    m_body->calculateCenter();
 }
 
 void Sprite::moveBy(Vec2<double> p_mov)
@@ -47,6 +49,8 @@ void Sprite::moveBy(Vec2<double> p_mov)
     
     for(;it != m_body->end(); it++)
         (*it) += p_mov;
+    
+    m_body->calculateCenter();
 }
 
 std::string Sprite::getSpritePath()

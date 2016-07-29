@@ -86,6 +86,8 @@ bool Body::collidesWith(Body* that)
 
 void Body::calculateCenter()
 {
+    m_center = Vec2<double>(0.0, 0.0);
+    
     if(m_points.size() == 1)
         m_center = m_points[0];
     else if(m_points.size() > 1)

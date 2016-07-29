@@ -39,6 +39,9 @@ public:
     /** Utilities */
     void calculateCenter();
     
+    /** Operators */
+    //stuff
+    
 private:
     /** Variables */
     std::vector< Vec2<double> > m_points;

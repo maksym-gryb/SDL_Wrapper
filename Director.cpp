@@ -296,6 +296,9 @@ void Director::draw()
         else
         {
             draw(*it);
+            #ifndef PRODUCTION_MODE
+            draw((*it)->getCollisionBody());
+            #endif
             it++;
         }
     }
@@ -317,6 +320,29 @@ void Director::draw(Node* p_node)
 {
     SDL_RenderCopy(m_windows->getRenderer(), p_node->getTexture(), p_node->getTextureSrc(), p_node->getTextureDst());
 }
+
+#ifndef PRODUCTION_MODE
+void Director::draw(Body* p_body)
+{
+    std::vector<Vec2<double> >::iterator it = p_body->start();
+    if(it == p_body->end())
+        return;
+    
+    std::vector<Vec2<double> >::iterator next = p_body->start();
+    next++;
+    
+    while(it != p_body->end() && next != p_body->end())
+    {
+        SDL_RenderDrawLine(m_windows->getRenderer(), (*it).x, (*it).y, (*next).x, (*next).y);
+        
+        it++;
+        next++;
+        
+        if(next == p_body->end())
+            next = p_body->start();
+    }
+}
+#endif
 
 void Director::animation()
 {
