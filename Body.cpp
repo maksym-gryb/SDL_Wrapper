@@ -55,6 +55,11 @@ bool Body::inRangeWith(Body* that)
     double distance = sqrt(pow(delta_x, 2) + pow(delta_y, 2));
     double limit    = this->getMaxRadius() + that->getMaxRadius();
     
+    std::cout << "Projectile Max Radius: " << this->getMaxRadius() << " -- ";
+    std::cout << "Ship Max Radius: " << that->getMaxRadius() << std::endl;
+    std::cout << "limit: (" << limit << ") -- ";
+    std::cout << "distance: (" << distance << ")" << std::endl;
+    
     if(distance < limit)
         return true;
     
@@ -87,6 +92,7 @@ bool Body::collidesWith(Body* that)
 void Body::calculateCenter()
 {
     m_center = Vec2<double>(0.0, 0.0);
+    m_max_radius = 0.0;
     
     if(m_points.size() == 1)
         m_center = m_points[0];
@@ -98,13 +104,12 @@ void Body::calculateCenter()
         
         m_center = m_center / m_points.size();
         
-        // calculate max radius
-        if(m_max_radius == 0.0)
-            m_max_radius = 0.0;
-        
         for(unsigned i = 0; i < m_points.size(); i++)
         {
-            double magnitude = m_points[i].magnitude();
+            Vec2<double> temp = m_points[i];
+            temp = temp - m_center;
+            
+            double magnitude = temp.magnitude();
             if(magnitude > m_max_radius)
                 m_max_radius = magnitude;
         }
