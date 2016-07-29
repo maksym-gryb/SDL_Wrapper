@@ -59,8 +59,8 @@ void Node::moveBy(Vec2<double> p_movement)
 
     if(m_texture_dst != NULL)
     {
-        m_texture_dst->x += p_movement.x;
-        m_texture_dst->y += p_movement.y;
+        m_texture_dst->x = m_position.x;
+        m_texture_dst->y = m_position.y;
     }
 }
 
