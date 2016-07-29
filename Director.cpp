@@ -331,6 +331,11 @@ void Director::draw(Body* p_body)
     std::vector<Vec2<double> >::iterator next = p_body->start();
     next++;
     
+    // draw collision body center
+    SDL_Rect rect = {p_body->getCenter().x - 5, p_body->getCenter().y - 5, 10, 10};
+    SDL_RenderFillRect(m_windows->getRenderer(), &rect);
+    
+    // draw collision body
     while(it != p_body->end() && next != p_body->end())
     {
         SDL_RenderDrawLine(m_windows->getRenderer(), (*it).x, (*it).y, (*next).x, (*next).y);
