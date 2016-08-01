@@ -41,9 +41,14 @@ void Sprite::setPosition(Vec2<double> p_position)
     m_body->calculateCenter();
 }
 
+void Sprite::setVelocity(Vec2<double> p_velocity)
+{
+    m_velocity = p_velocity;
+}
+
 void Sprite::moveBy(Vec2<double> p_mov)
 {
-    Node::moveBy(p_mov);
+    this->Node::moveBy(p_mov);
     
     std::vector<Vec2<double> >::iterator it = m_body->start();
     

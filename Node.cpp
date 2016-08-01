@@ -9,8 +9,9 @@ Node::Node()
     m_show = false;
 
     // Arrangement
-    m_position = Vec2<double>(0.0,  0.0);
-    m_anchor   = Vec2<double>(0.5,  0.5);
+    m_position = Vec2<double>(0.0,   0.0);
+    m_velocity = Vec2<double>(0.0,   0.0);
+    m_anchor   = Vec2<double>(0.5,   0.5);
     m_size     = Vec2<double>(30.0, 30.0);
     
     // Texture
@@ -53,6 +54,11 @@ void Node::setPosition(Vec2<double> pos)
     }
 }
 
+void Node::setVeclocity(Vec2<double> p_velocity)
+{
+    m_velocity = p_velocity;
+}
+
 void Node::moveBy(Vec2<double> p_movement)
 {
     m_position += p_movement;
@@ -67,6 +73,11 @@ void Node::moveBy(Vec2<double> p_movement)
 Vec2<double> Node::getPosition()
 {
     return m_position;
+}
+
+Vec2<double> Node::getVelocity()
+{
+    return m_velocity;
 }
 
 void Node::setSize(Vec2<double> p_size)

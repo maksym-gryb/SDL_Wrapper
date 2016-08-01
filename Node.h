@@ -19,8 +19,10 @@ public:
     /**Arrangement */
     // position
     virtual void setPosition(Vec2<double> p_position);
+    virtual void setVeclocity(Vec2<double> p_velocity);
     virtual void moveBy(Vec2<double> p_movement);
     Vec2<double> getPosition();
+    Vec2<double> getVelocity();
 
     // anchor
     void setAnchor(Vec2<double> p_anchor);
@@ -46,6 +48,7 @@ protected:
 
     // Arrangement
     Vec2<double> m_position;
+    Vec2<double> m_velocity;
     Vec2<double> m_anchor;
     Vec2<double> m_size;
 

@@ -34,6 +34,7 @@ public:
     
     /** Arrangement */
     void setPosition(Vec2<double> p_position);
+    void setVelocity(Vec2<double> p_velocity);
     void moveBy(Vec2<double>);
 
     /** Image */
