@@ -31,6 +31,22 @@ Body::Body(Body* that)
 
 Body::~Body() {}
 
+void Body::setPosition(Vec2<double> p_position)
+{
+    for(unsigned i = 0; i < m_points.size(); i++)
+        m_points[i] = m_points[i] - m_center + p_position;
+    
+    m_center = p_position;
+}
+
+void Body::moveBy(Vec2<double> p_mov)
+{
+    for(unsigned i = 0; i < m_points.size(); i++)
+        m_points[i] += p_mov;
+    
+    m_center += p_mov;
+}
+
 void Body::pushPoint(Vec2<double> point)
 {
     m_points.push_back(point);

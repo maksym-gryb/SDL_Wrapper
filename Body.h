@@ -25,6 +25,10 @@ public:
     Body(Body *that);
     virtual ~Body();
     
+    /** Arrangement */
+    void setPosition(Vec2<double> p_position);
+    void moveBy(Vec2<double> p_mov);
+    
     /** Body */
     void pushPoint(Vec2<double> point);
     std::vector< Vec2<double> >::iterator start();// returns an iterator at the beginning of m_points

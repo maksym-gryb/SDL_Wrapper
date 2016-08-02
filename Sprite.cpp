@@ -28,26 +28,11 @@ Sprite::~Sprite() {}
 
 void Sprite::setPosition(Vec2<double> p_position)
 {
+    // Set Node Position
     Node::setPosition(p_position);
     
-    std::vector<Vec2<double> >::iterator it = m_body->start();
-    
-    for(;it != m_body->end(); it++)
-    {
-        if((*it).x > m_body->getCenter().x)
-            (*it).x -= m_body->getCenter().x;
-        else
-            (*it).x = m_body->getCenter().x - (*it).x;
-        
-        if((*it).y > m_body->getCenter().y)
-            (*it).y -= m_body->getCenter().y;
-        else
-            (*it).y = m_body->getCenter().y - (*it).y;
-        
-        (*it) = (*it) + p_position;
-    }
-    
-    m_body->calculateCenter();
+    // Set Collision Body's Position
+    m_body->setPosition(p_position);
 }
 
 void Sprite::setVelocity(Vec2<double> p_velocity)
@@ -57,14 +42,11 @@ void Sprite::setVelocity(Vec2<double> p_velocity)
 
 void Sprite::moveBy(Vec2<double> p_mov)
 {
-    this->Node::moveBy(p_mov);
+    // Move Node Position
+    Node::moveBy(p_mov);
     
-    std::vector<Vec2<double> >::iterator it = m_body->start();
-    
-    for(;it != m_body->end(); it++)
-        (*it) += p_mov;
-    
-    m_body->calculateCenter();
+    // Move Collision Body Position
+    m_body->moveBy(p_mov);
 }
 
 std::string Sprite::getSpritePath()
