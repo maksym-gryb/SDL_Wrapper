@@ -20,6 +20,24 @@ Node::Node()
     m_texture_dst = NULL;
 }
 
+Node::Node(Node *that)
+{
+    // Status
+    m_id   = ++s_current_id;
+    m_show = false;
+
+    // Arrangement
+    m_position = that->m_position;
+    m_velocity = that->m_velocity;
+    m_anchor   = that->m_anchor;
+    m_size     = that->m_size;
+    
+    // Texture
+    m_texture     = that->m_texture;
+    m_texture_src = that->m_texture_src;
+    m_texture_dst = that->m_texture_dst;
+}
+
 Node::~Node()
 {
     //SDL_DestroyTexture(m_texture);

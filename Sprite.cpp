@@ -15,6 +15,15 @@ Sprite::Sprite(std::string p_sprite_path) : Sprite()
     m_sprite_path = p_sprite_path;
 }
 
+Sprite::Sprite(Sprite* that) : Node(that)
+{
+    // Image
+    m_sprite_path = that->m_sprite_path;
+    
+    // Collision Body
+    m_body = new Body(that->m_body);
+}
+
 Sprite::~Sprite() {}
 
 void Sprite::setPosition(Vec2<double> p_position)

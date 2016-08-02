@@ -22,6 +22,7 @@ public:
     /** Constructors */
     Body();
     Body(const Vec2<double> p_body...);//currently does not work
+    Body(Body *that);
     virtual ~Body();
     
     /** Body */

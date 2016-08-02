@@ -30,6 +30,7 @@ public:
     /** Constructors */
     Sprite();
     Sprite(std::string p_sprite_path);
+    Sprite(Sprite *that);
     virtual ~Sprite();
     
     /** Arrangement */

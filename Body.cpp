@@ -19,6 +19,16 @@ Body::Body(const Vec2<double> p_body...) : Body()
     calculateCenter();
 }
 
+Body::Body(Body* that)
+{
+    m_center = that->m_center;
+    
+    m_max_radius = that->m_max_radius;
+    
+    for(unsigned i = 0; i < that->m_points.size(); i++)
+        m_points.push_back(that->m_points[i]);
+}
+
 Body::~Body() {}
 
 void Body::pushPoint(Vec2<double> point)

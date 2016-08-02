@@ -9,6 +9,7 @@ class Node{
 public:
     /**Constructor */
     Node();
+    Node(Node *that);
     virtual ~Node();
 
     /**Node Status */
