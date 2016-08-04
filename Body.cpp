@@ -1,25 +1,19 @@
 #include "Body.h"
+#include "Director.h"
 
-Body::Body()
+Body::Body(WindowWrapper* p_render_target) : Node()
 {
     m_center = Vec2<double>(0.0, 0.0);
     
     m_max_radius = 0.0;
+    
+    if(p_render_target == NULL)
+        m_render_target = Director::getInstance()->getDefaultWW();
+    else
+        m_render_target = p_render_target;
 }
 
-Body::Body(const Vec2<double> p_body...) : Body()
-{
-    /*va_list args;
-    va_start(args, p_body);
-    
-    do{
-        m_body.push_back(va_arg(args, Vec2<double>));
-    }while();*/
-    
-    calculateCenter();
-}
-
-Body::Body(Body* that)
+Body::Body(Body* that) : Node(that)
 {
     m_center = that->m_center;
     

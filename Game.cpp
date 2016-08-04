@@ -45,6 +45,10 @@ int Game::run(Scene* p_starting_scene)
         return -1;
     
     setScene(p_starting_scene);
+    
+    Director::getInstance()->setupCursor();
+    
+    Director::getInstance()->setupDefaultFont();
 
     while(isRunning())
     {

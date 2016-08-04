@@ -14,14 +14,15 @@
 #ifndef BODY_H
 #define BODY_H
 
+#include "Node.h"
+
 #include <vector>
 #include "Vec2.h"
 
-class Body {
+class Body : public Node{
 public:
     /** Constructors */
-    Body();
-    Body(const Vec2<double> p_body...);//currently does not work
+    Body(WindowWrapper* p_render_target = NULL);
     Body(Body *that);
     virtual ~Body();
     

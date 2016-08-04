@@ -36,6 +36,9 @@ Node::Node(Node *that)
     m_texture     = that->m_texture;
     m_texture_src = that->m_texture_src;
     m_texture_dst = that->m_texture_dst;
+    
+    // Render Target
+    m_render_target = that->m_render_target;
 }
 
 Node::~Node()
@@ -141,4 +144,9 @@ SDL_Rect* Node::getTextureSrc()
 SDL_Rect* Node::getTextureDst()
 {
     return m_texture_dst;
+}
+
+WindowWrapper* Node::getRenderTarget()
+{
+    return m_render_target;
 }

@@ -19,7 +19,7 @@ Director::Director()
 {
     m_running = false;
     
-    m_windows = NULL;
+    m_windows.push_back(NULL);
     
     m_default_font = NULL;
     
@@ -51,13 +51,19 @@ bool Director::isRunning()
 
 void Director::cleanUp()
 {
-    delete m_windows;
+    for(unsigned i = m_windows.size() - 1; i > 0; i++)
+    {
+        if(m_windows[i] != NULL)
+            delete m_windows[i];
+        
+        m_windows.pop_back();
+    }
     
     delete m_input_handler;
 
     IMG_Quit();
     
-    //TTF_Quit():?????
+    TTF_Quit();
 
     SDL_Quit();
 }
@@ -70,18 +76,9 @@ bool Director::initSDL()
         return false;
     }
 
-    m_windows = new WindowWrapper("RPG Battle",
-                                  WINDOW_X, WINDOW_Y,
-                                  WINDOW_W, WINDOW_H,
-                                  SDL_WINDOW_SHOWN
-                                 );
-
-    if(m_windows->errorsExist())
-        return false;
-
     int img_flags = IMG_INIT_PNG;
     if(IMG_Init(img_flags) & img_flags)
-         m_surface = SDL_GetWindowSurface(m_windows->getWindow());
+         ;//m_surface = SDL_GetWindowSurface(m_windows->getWindow());// not currently viable with multi-windows
     else
     {
         std::cerr << "IMG_Init error: " << SDL_GetError() << std::endl;
@@ -97,16 +94,34 @@ bool Director::initSDL()
     return true;
 }
 
+WindowWrapper* Director::createWindow(std::string p_title)
+{
+    WindowWrapper* temp_ww = new WindowWrapper(p_title.c_str(),
+                                               WINDOW_X, WINDOW_Y,
+                                               WINDOW_W, WINDOW_H,
+                                               SDL_WINDOW_SHOWN
+                                              );
+
+    if(temp_ww->errorsExist())
+    {
+        delete temp_ww;
+        return NULL;
+    }
+    
+    if(m_windows.size() == 1 && m_windows[0] == NULL)
+        m_windows[0] = temp_ww;
+    else
+        m_windows.push_back(temp_ww);
+    
+    return temp_ww;
+}
+
 bool Director::init()
 {
     if(!initSDL())
-    return (m_running = false);
+        return (m_running = false);
 
     m_input_handler = new InputHandler;
-
-    setupDefaultFont();
-
-    setupCursor();
     
     return (m_running = true);
 }
@@ -242,7 +257,7 @@ SDL_Texture* Director::createTexture(Sprite* p_sprite)
 
     //load new texture
     SDL_Surface* temp_surface = IMG_Load(p_sprite->getSpritePath().c_str());
-    SDL_Texture* temp_texture = SDL_CreateTextureFromSurface(m_windows->getRenderer(), temp_surface);
+    SDL_Texture* temp_texture = SDL_CreateTextureFromSurface(p_sprite->getRenderTarget()->getRenderer(), temp_surface);
 
     // free surface
     SDL_FreeSurface(temp_surface);
@@ -261,7 +276,7 @@ void Director::assignTexture(Sprite* pSprite)
 SDL_Texture* Director::createTexture(Label* p_label)
 {
     SDL_Surface* temp_surface = TTF_RenderText_Blended(p_label->getFont(), p_label->getText().c_str(), p_label->getColor());
-    SDL_Texture* temp_texture = SDL_CreateTextureFromSurface(m_windows->getRenderer(), temp_surface);
+    SDL_Texture* temp_texture = SDL_CreateTextureFromSurface(p_label->getRenderTarget()->getRenderer(), temp_surface);
 
     SDL_QueryTexture(temp_texture, NULL, NULL, NULL, NULL);
 
@@ -277,13 +292,29 @@ void Director::assignTexture(Label* p_label)
 
 void Director::render()
 {
-    SDL_SetRenderDrawColor(m_windows->getRenderer(), 0, 0, 0, 255);
-    SDL_RenderClear(m_windows->getRenderer());
+    for(unsigned i = 0; i < m_windows.size(); i++)
+    {
+        if(m_windows[i] == NULL)
+            continue;
+        SDL_SetRenderDrawColor(m_windows[i]->getRenderer(), 0, 0, 0, 255);
+        SDL_RenderClear(m_windows[i]->getRenderer());
+    }
 
-    SDL_SetRenderDrawColor(m_windows->getRenderer(), 255, 255, 255, 255);
+    for(unsigned i = 0; i < m_windows.size(); i++)
+    {
+        if(m_windows[i] == NULL)
+            continue;
+        SDL_SetRenderDrawColor(m_windows[i]->getRenderer(), 255, 255, 255, 255);
+    }
+    
     draw();
 
-    SDL_RenderPresent(m_windows->getRenderer());
+    for(unsigned i = 0; i < m_windows.size(); i++)
+    {
+        if(m_windows[i] == NULL)
+            continue;
+        SDL_RenderPresent(m_windows[i]->getRenderer());
+    }
 }
 
 void Director::draw()
@@ -318,7 +349,7 @@ void Director::draw()
 
 void Director::draw(Node* p_node)
 {
-    SDL_RenderCopy(m_windows->getRenderer(), p_node->getTexture(), p_node->getTextureSrc(), p_node->getTextureDst());
+    SDL_RenderCopy(p_node->getRenderTarget()->getRenderer(), p_node->getTexture(), p_node->getTextureSrc(), p_node->getTextureDst());
 }
 
 #ifndef PRODUCTION_MODE
@@ -332,13 +363,13 @@ void Director::draw(Body* p_body)
     next++;
     
     // draw collision body center
-    SDL_Rect rect = {p_body->getCenter().x - 5, p_body->getCenter().y - 5, 10, 10};
-    SDL_RenderFillRect(m_windows->getRenderer(), &rect);
+    SDL_Rect rect = {(int)p_body->getCenter().x - 5, (int)p_body->getCenter().y - 5, 10, 10};
+    SDL_RenderFillRect(p_body->getRenderTarget()->getRenderer(), &rect);
     
     // draw collision body
     while(it != p_body->end() && next != p_body->end())
     {
-        SDL_RenderDrawLine(m_windows->getRenderer(), (*it).x, (*it).y, (*next).x, (*next).y);
+        SDL_RenderDrawLine(p_body->getRenderTarget()->getRenderer(), (*it).x, (*it).y, (*next).x, (*next).y);
         
         it++;
         next++;
@@ -348,6 +379,15 @@ void Director::draw(Body* p_body)
     }
 }
 #endif
+
+WindowWrapper* Director::getDefaultWW()
+{
+    if(m_windows.size() > 0)
+        return m_windows[0];
+    
+    m_windows.push_back(NULL);
+    return m_windows[0];
+}
 
 void Director::animation()
 {

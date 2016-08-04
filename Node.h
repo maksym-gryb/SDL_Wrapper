@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include "Vec2.h"
+#include "WindowWrapper.h"
 
 class Node{
 public:
@@ -38,6 +39,9 @@ public:
     SDL_Texture* getTexture();
     SDL_Rect* getTextureSrc();
     SDL_Rect* getTextureDst();
+    
+    /** Render Target */
+    WindowWrapper* getRenderTarget();
 
 protected:
     // Static Varaibles
@@ -57,6 +61,9 @@ protected:
     SDL_Texture* m_texture;
     SDL_Rect* m_texture_src;
     SDL_Rect* m_texture_dst;
+    
+    // Render Target
+    WindowWrapper* m_render_target;
 };
 
 #endif /* NODE_H */

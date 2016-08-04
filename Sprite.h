@@ -28,8 +28,7 @@
 class Sprite : public Node{
 public:
     /** Constructors */
-    Sprite();
-    Sprite(std::string p_sprite_path);
+    Sprite(std::string p_sprite_path, WindowWrapper* p_render_target = NULL);
     Sprite(Sprite *that);
     virtual ~Sprite();
     

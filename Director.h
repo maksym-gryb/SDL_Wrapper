@@ -42,7 +42,6 @@ public:
 
   /**SDL */
   bool initSDL();
-  SDL_Window* createWindow();
 
   /**Setup */
   bool init();
@@ -74,6 +73,10 @@ public:
 #ifndef PRODUCTION_MODE
   void draw(Body* p_body);
 #endif
+  
+  /** Render Target */
+  WindowWrapper* createWindow(std::string p_title);
+  WindowWrapper* getDefaultWW();
 
   /**Animation */
   void animation();
@@ -97,7 +100,7 @@ private:
     std::map<std::string, SDL_Texture*> m_loaded_textures;
 
     // SDL
-    WindowWrapper* m_windows;
+    std::vector<WindowWrapper*> m_windows;
     SDL_Surface*   m_surface;
     TTF_Font* m_default_font;
 

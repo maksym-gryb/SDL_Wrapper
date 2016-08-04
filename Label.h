@@ -13,7 +13,7 @@ const std::string DEFAULT_FONT = "resources/Mops.ttf";
 class Label: public Node{
 public:
     /**Constructor */
-    Label();
+    Label(WindowWrapper* p_render_target = NULL);
     ~Label();
 
     /**Text */

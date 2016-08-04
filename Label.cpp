@@ -1,11 +1,18 @@
 #include "Label.h"
+#include "Director.h"
 
-Label::Label()
+Label::Label(WindowWrapper* p_render_target) : Node()
 {
     m_text = "";
     m_font_size = DEFAULT_TEXT_SIZE;
     m_font = NULL;
     m_text_color = {255, 255, 255, 255};
+    
+    // Render Target
+    if(p_render_target == NULL)
+        m_render_target = Director::getInstance()->getDefaultWW();
+    else
+        m_render_target = p_render_target;
 }
 
 Label::~Label()

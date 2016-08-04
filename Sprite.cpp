@@ -1,18 +1,19 @@
 #include "Sprite.h"
+#include "Director.h"
 
-Sprite::Sprite() : Node()
-{
-    // Image
-    m_sprite_path = "";
-    
-    // Collision Body
-    m_body = new Body;
-}
-
-Sprite::Sprite(std::string p_sprite_path) : Sprite()
+Sprite::Sprite(std::string p_sprite_path, WindowWrapper* p_render_target) : Node()
 {
     // Image
     m_sprite_path = p_sprite_path;
+    
+    // Collision Body
+    m_body = new Body;
+    
+    // Render Target
+    if(p_render_target == NULL)
+        m_render_target = Director::getInstance()->getDefaultWW();
+    else
+        m_render_target = p_render_target;
 }
 
 Sprite::Sprite(Sprite* that) : Node(that)
@@ -22,6 +23,9 @@ Sprite::Sprite(Sprite* that) : Node(that)
     
     // Collision Body
     m_body = new Body(that->m_body);
+    
+    // Render Target
+    m_render_target = that->m_render_target;
 }
 
 Sprite::~Sprite() {}
