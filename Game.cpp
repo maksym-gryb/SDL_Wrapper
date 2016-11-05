@@ -67,6 +67,78 @@ int Game::run(Scene* p_starting_scene)
     return 0;
 }
 
+int Game::run()
+{
+    if(m_critical_error)
+        return -1;
+    
+    //loadXML();
+    
+    Director::getInstance()->setupCursor();
+    
+    Director::getInstance()->setupDefaultFont();
+
+    while(isRunning())
+    {
+        m_timer_now = Director::getInstance()->getTimer();
+
+        update();
+
+        render();
+
+        animation();
+
+        handleEvents();
+    }
+}
+
+int Game::loadXML()
+{
+    TiXmlDocument doc;
+    
+    // Load XML
+    if(!doc.LoadFile("config.xml"))
+    {
+        std::cerr << "Error loading file";
+        return -1;
+    }
+    
+    TiXmlElement* root = doc.FirstChildElement();
+    if(root == NULL)
+    {
+        std::cerr << "Failed to load file! No Root Element.";
+        return -1;
+    }
+    
+    depthFirstSearch(root);
+    
+    delete root;
+    
+    return 0;
+}
+
+void Game::depthFirstSearch(TiXmlElement* node, std::string depth)
+{
+    // error handling
+    if(node == NULL)
+    {
+        std::cerr << "void depthFirstSearch(TiXmlElement*, std::string) FAILED! ";
+        std::cerr << "First function parameter cannot be NULL!";
+        return;
+    }
+    
+    // print root and it's attributes
+    std::cout << depth << node->Value() << " :";
+    for(TiXmlAttribute* attr = node->FirstAttribute(); attr != NULL; attr = attr->Next())
+        std::cout << " " << attr->Name() << "=" << attr->Value();
+        //std::cout << attr->Name() << "=" << attr->Value() << "\t";// A Spacing Solution
+    std::cout << std::endl;
+    
+    // print root's children
+    for(TiXmlElement* sub_e = node->FirstChildElement(); sub_e != NULL; sub_e = sub_e->NextSiblingElement())
+        depthFirstSearch(sub_e, depth + "\t");
+}
+
 void Game::quit()
 {
     Director::getInstance()->quit();

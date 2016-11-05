@@ -5,6 +5,8 @@
 #include <ctime>
 #include <string>
 
+#include "../../../../../usr/include/tinyxml.h"
+
 #include "Director.h"
 
 #include "Scene.h"
@@ -43,6 +45,9 @@ public:
 public:
   /** Main */
   int  run(Scene* starting_scene);
+  int  run();
+  int  loadXML();
+  void depthFirstSearch(TiXmlElement* node, std::string depth = "");
   void quit();
   void cleanUp();
 
